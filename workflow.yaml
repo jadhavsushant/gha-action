@@ -1,0 +1,31 @@
+name: Dynamic Environment Workflow
+
+on:
+  push:
+    branches:
+      - dev
+      - stage
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Determine Environment
+        id: set-env
+        run: |
+          if [[ "${{ github.ref_name }}" == "develop" ]]; then
+            echo "env_name=dev" >> $GITHUB_ENV
+          elif [[ "${{ github.ref_name }}" == "stage" ]]; then
+            echo "env_name=stage" >> $GITHUB_ENV
+          elif [[ "${{ github.ref_name }}" == "prod" ]]; then
+            echo "env_name=prod" >> $GITHUB_ENV
+          fi
+
+      - name: Access Secrets Dynamically
+        env:
+          CALLBACK_API_TOKEN: ${{ secrets.CALL_BACK_API }}
+        run: |
+          echo "Environment is: $env_name"
+          echo "API Token: $CALL_BACK_API"
