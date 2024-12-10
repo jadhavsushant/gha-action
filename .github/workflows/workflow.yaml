@@ -24,6 +24,8 @@ jobs:
         env:
           API_TOKEN: ${{ secrets.CALL_BACK_API }}
           MYENV: ${{ vars.MYENV }}
+          REPOVAR: ${{ vars.REPOVAR }}
         run: |
           echo "Using API Token: $API_TOKEN"
           echo "The secret value is: $MYENV"
+          echo "The repo value is: $REPOVAR"
