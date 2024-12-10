@@ -28,4 +28,4 @@ jobs:
           CALLBACK_API_TOKEN: ${{ secrets.CALL_BACK_API }}
         run: |
           echo "Environment is: $env_name"
-          echo "API Token: $CALL_BACK_API"
+          echo "API Token: $CALLBACK_API_TOKEN"
