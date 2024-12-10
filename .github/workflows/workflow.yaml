@@ -1,31 +1,28 @@
-name: Dynamic Environment Workflow
+name: CI/CD Workflow
 
 on:
   push:
     branches:
-      - develop
+      - dev
       - stage
-      - master
+      - prod
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Determine Environment
-        id: set-env
-        run: |
-          if [[ "${{ github.ref_name }}" == "develop" ]]; then
-            echo "env_name=develop" >> $GITHUB_ENV
-          elif [[ "${{ github.ref_name }}" == "stage" ]]; then
-            echo "env_name=stage" >> $GITHUB_ENV
-          elif [[ "${{ github.ref_name }}" == "prod" ]]; then
-            echo "env_name=prod" >> $GITHUB_ENV
-          fi
+    # Dynamically set environment based on branch
+    environment: ${{ github.ref_name }}
 
-      - name: Access Secrets Dynamically
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Print Environment Name
+        run: echo "Deploying to environment: ${{ github.ref_name }}"
+
+      - name: Use Environment Secrets
         env:
-          CALLBACK_API_TOKEN: ${{ secrets.CALL_BACK_API }}
+          API_TOKEN: ${{ secrets.CALL_BACK_API }}
         run: |
-          echo "Environment is: $env_name"
-          echo "API Token: $CALLBACK_API_TOKEN"
+          echo "Using API Token: $API_TOKEN"
