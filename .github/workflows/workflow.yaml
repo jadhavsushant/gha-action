@@ -27,3 +27,4 @@ jobs:
           API_TOKEN: ${{ secrets.CALL_BACK_API }}
         run: |
           echo "Using API Token: $API_TOKEN"
+          echo "The secret value is: $MYENV"
