@@ -10,8 +10,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    # Dynamically set environment based on branch
     environment: ${{ github.ref_name }}
 
     steps:
@@ -25,7 +23,7 @@ jobs:
       - name: Use Environment Secrets
         env:
           API_TOKEN: ${{ secrets.CALL_BACK_API }}
-          MYENV: ${{ secrets.MYENV }}
+          MYENV: ${{ vars.MYENV }}
         run: |
           echo "Using API Token: $API_TOKEN"
           echo "The secret value is: $MYENV"
