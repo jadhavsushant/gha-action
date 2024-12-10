@@ -3,7 +3,7 @@ name: CI/CD Workflow
 on:
   push:
     branches:
-      - dev
+      - develop
       - stage
       - prod
 
@@ -17,6 +17,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Print Environment
+        run: |
+          echo "Environment: ${{ github.ref_name }}"
 
       - name: Use Environment Secrets
         env:
