@@ -18,10 +18,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-
-      - name: Print Environment
-        run: echo "Deploying to ${{ github.ref_name }}"
-
       - name: Use Environment Secrets
         env:
           API_TOKEN: ${{ secrets.CALL_BACK_API }}
