@@ -3,9 +3,9 @@ name: Dynamic Environment Workflow
 on:
   push:
     branches:
-      - dev
+      - develop
       - stage
-      - prod
+      - master
 
 jobs:
   deploy:
