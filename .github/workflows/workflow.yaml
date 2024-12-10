@@ -19,7 +19,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Print Environment Name
-        run: echo "Deploying to environment: ${{ github.ref_name }}"
+        run: |
+          echo "Environment: ${{ github.ref_name }}"
 
       - name: Use Environment Secrets
         env:
