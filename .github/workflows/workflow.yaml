@@ -30,6 +30,17 @@ jobs:
           echo "The username is: $USNAME"
           echo "The user credential is: $USRCRED"
 
+      - name: Set Environment
+        id: set-env
+        run: |
+          if [[ "${{ github.base_ref }}" == "develop" ]]; then
+            echo "env=dev" >> $GITHUB_ENV
+          elif [[ "${{ github.base_ref }}" == "stage" ]]; then
+            echo "env=stage" >> $GITHUB_ENV
+          elif [[ "${{ github.base_ref }}" == "master" ]]; then
+            echo "env=prod" >> $GITHUB_ENV
+          fi
+
       - name: Print Environment
         run: |
           echo "Environment: ${{ github.ref_name }}"
