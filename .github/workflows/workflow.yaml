@@ -14,20 +14,34 @@ jobs:
     env:
       MYENV: ${{ secrets.MY_ENV }}
       REPOVAR: ${{ vars.REPOVAR }}
+      USNAME: ${{ var.USERNAME }}
+      USRCRED: ${{ secrets.USRCRED }}
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
       
-      - name: print envs
+      - name: Print Before envs
         run: |
+          echo "Before settings environement"
           echo "Environment: ${{ github.ref_name }}"
           echo "The secret value is: $MYENV"
           echo "The repo value is: $REPOVAR"
+          echo "The username is: $USNAME"
+          echo "The user credential is: $USRCRED"
 
       - name: Print Environment
         run: |
           echo "Environment: ${{ github.ref_name }}"
+
+      - name: Print After envs
+        run: |
+          echo "After settings environement"
+          echo "Environment: ${{ github.ref_name }}"
+          echo "The secret value is: $MYENV"
+          echo "The repo value is: $REPOVAR"
+          echo "The username is: $USNAME"
+          echo "The user credential is: $USRCRED"
 
       - name: Use Environment Secrets
         env:
@@ -38,3 +52,5 @@ jobs:
           echo "Using API Token: $API_TOKEN"
           echo "The secret value is: $MYENV"
           echo "The repo value is: $REPOVAR"
+          echo "The username is: $USNAME"
+          echo "The user credential is: $USRCRED"
