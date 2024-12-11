@@ -12,56 +12,29 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
     env:
-      MYENV: ${{ secrets.MY_ENV }}
-      REPOVAR: ${{ vars.REPOVAR }}
-      USNAME: ${{ vars.USERNAME }}
+      CALL_BACK_API: ${{ secrets.CALL_BACK_API }}
       USRCRED: ${{ secrets.USRCRED }}
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v2
       
-      - name: Print Before envs
+      - name: print env before setup
         run: |
-          echo "Before settings environement"
-          echo "Environment: ${{ github.ref_name }}"
-          echo "The secret value is: $MYENV"
-          echo "The repo value is: $REPOVAR"
-          echo "The username is: $USNAME"
-          echo "The user credential is: $USRCRED"
+          echo "Environment: ${{ github.environment }}"
+          echo "Branch Name: ${{ github.ref_name }}"
+          echo "Callback API Token: ${{ secrets.CALL_BACK_API }}"
+          echo "User Cred: ${{ secrets.USRCRED }}"
 
-      - name: Set Environment
-        id: set-env
+      - name: Set up secrets and environment
         run: |
-          if [[ "${{ github.base_ref }}" == "develop" ]]; then
-            echo "env=dev" >> $GITHUB_ENV
-          elif [[ "${{ github.base_ref }}" == "stage" ]]; then
-            echo "env=stage" >> $GITHUB_ENV
-          elif [[ "${{ github.base_ref }}" == "master" ]]; then
-            echo "env=prod" >> $GITHUB_ENV
-          fi
-
-      - name: Print Environment
+          echo "Setting up environment for branch: ${{ github.ref_name }}"
+          
+          # For debugging, print environment and secrets
+          echo "Environment: ${{ github.environment }}"
+          echo "Branch Name: ${{ github.ref_name }}"
+      
+      - name: Use secrets after environment setup
         run: |
-          echo "Environment: ${{ github.ref_name }}"
-
-      - name: Print After envs
-        run: |
-          echo "After settings environement"
-          echo "Environment: ${{ github.ref_name }}"
-          echo "The secret value is: $MYENV"
-          echo "The repo value is: $REPOVAR"
-          echo "The username is: $USNAME"
-          echo "The user credential is: $USRCRED"
-
-      - name: Use Environment Secrets
-        env:
-          API_TOKEN: ${{ secrets.CALL_BACK_API }}
-          MYENV: ${{ vars.MYENV }}
-          REPOVAR: ${{ vars.REPOVAR }}
-        run: |
-          echo "Using API Token: $API_TOKEN"
-          echo "The secret value is: $MYENV"
-          echo "The repo value is: $REPOVAR"
-          echo "The username is: $USNAME"
-          echo "The user credential is: $USRCRED"
+          echo "Callback API Token: ${{ secrets.CALL_BACK_API }}"
+          echo "User Cred: ${{ secrets.USRCRED }}"
