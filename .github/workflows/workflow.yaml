@@ -10,7 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
+    environment: ${{ github.base_ref }}
     env:
       CALL_BACK_API: ${{ secrets.CALL_BACK_API }}
       USRCRED: ${{ secrets.USRCRED }}
