@@ -11,19 +11,33 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
+    env:
+      CALL_BACK_API: ${{ secrets.CALL_BACK_API }}
+      USRCRED: ${{ secrets.USRCRED }}
+      MYENV: ${{ vars.MYENV }}
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Print Environment
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: print env before setup
         run: |
-          echo "Environment: ${{ github.ref_name }}"
+          echo "Environment: ${{ github.environment }}"
+          echo "Branch Name: ${{ github.ref_name }}"
+          echo "Callback API Token: ${{ secrets.CALL_BACK_API }}"
+          echo "User Cred: ${{ secrets.USRCRED }}"
+          echo "MYENV: $MYENV"
 
-      - name: Use Environment Secrets
-        env:
-          API_TOKEN: ${{ secrets.CALL_BACK_API }}
-          MYENV: ${{ vars.MYENV }}
+      - name: Set up secrets and environment
         run: |
-          echo "Using API Token: $API_TOKEN"
-          echo "The secret value is: $MYENV"
+          echo "Setting up environment for branch: ${{ github.ref_name }}"
+          
+          # For debugging, print environment and secrets
+          echo "Environment: ${{ github.environment }}"
+          echo "Branch Name: ${{ github.ref_name }}"
+      
+      - name: Use secrets after environment setup
+        run: |
+          echo "Callback API Token: ${{ secrets.CALL_BACK_API }}"
+          echo "User Cred: ${{ secrets.USRCRED }}"
+          echo "MYENV: $MYENV"
