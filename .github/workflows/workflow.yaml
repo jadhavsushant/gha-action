@@ -14,6 +14,7 @@ jobs:
     env:
       CALL_BACK_API: ${{ secrets.CALL_BACK_API }}
       USRCRED: ${{ secrets.USRCRED }}
+      MYENV: ${{ vars.MYENV }}
 
     steps:
       - name: Checkout
@@ -25,6 +26,7 @@ jobs:
           echo "Branch Name: ${{ github.ref_name }}"
           echo "Callback API Token: ${{ secrets.CALL_BACK_API }}"
           echo "User Cred: ${{ secrets.USRCRED }}"
+          echo "MYENV: $MYENV"
 
       - name: Set up secrets and environment
         run: |
@@ -38,3 +40,4 @@ jobs:
         run: |
           echo "Callback API Token: ${{ secrets.CALL_BACK_API }}"
           echo "User Cred: ${{ secrets.USRCRED }}"
+          echo "MYENV: $MYENV"
