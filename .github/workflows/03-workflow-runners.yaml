@@ -5,22 +5,22 @@ on:
 
 jobs:
   ubuntu-echo:
-    name: "Show OS"
     runs-on: ubuntu-latest
     steps:
     - name: "Show OS"
-      run: "This job is running on an Ubuntu runner."
+      run: |
+        echo "This job is running on an Ubuntu runner."
   
   windows-echo:
-    name: "Show OS"
     runs-on: windows-latest
     steps:
       - name: "windows-echo"
-        run: "This job is running on a Windows runner."
+        run: |
+          echo "This job is running on a Windows runner."
   
   mac-echo:
-    name: "Show OS"
     runs-on: macos-latest
     steps:
       - name: "mac-echo"
-        run: "This job is running on a MacOS runner."
+        run: |
+          echo "This job is running on a MacOS runner."
