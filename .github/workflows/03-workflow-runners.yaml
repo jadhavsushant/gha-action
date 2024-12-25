@@ -11,7 +11,7 @@ jobs:
     - name: "Show OS"
       run: |
         echo "This job is running on an Ubuntu runner."
-        echo "Runner os is ${{ github.$RUNNER_OS }}"
+        echo $RUNNER_OS
   
   windows-echo:
     runs-on: windows-latest
