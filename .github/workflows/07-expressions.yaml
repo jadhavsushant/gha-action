@@ -22,7 +22,7 @@ jobs:
           echo "Commit SHA: ${{ github.sha }}"
           echo "Runner OS: ${{ runner.os }}"
       
-      - name: "[debug] Print when triggered from main"
+      - name: "[debug] Print when triggered from develop"
         if: inputs.debug == 'true' && github.ref == 'develop'
         run: |
           echo "I was triggered from main"
