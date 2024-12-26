@@ -1,7 +1,6 @@
 name: 07 - Using Expressions
 
-on: 
-  push:
+on:
   workflow_dispatch:
     inputs:
       debug:
@@ -29,4 +28,5 @@ jobs:
           echo "I was triggered from main"
       - name: Greeting
         run: echo "Hello, world"
+
 
