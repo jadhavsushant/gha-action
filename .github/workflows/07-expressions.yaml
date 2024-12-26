@@ -18,4 +18,14 @@ jobs:
         run: |
           echo "Triggered by: ${{ github.actor }}"
           echo "Printing Inpute trigger: ${{ inputs.debug }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Runner OS: ${{ runner.os }}"
+      
+      - name: "[debug] Print when triggered from main"
+        if: inputs.debug == 'true' && github.ref == 'develop'
+        run: |
+          echo "I was triggered from main"
+      - name: Greeting
+        run: echo "Hello, world"
 
