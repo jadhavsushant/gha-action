@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "[debug] Print start-up data"
-        if: ${{ inputs.debug }} == 'true'
+        if: ${{ inputs.debug }}
         run: |
           echo "Triggered by: ${{ github.actor }}"
           echo "Printing Inpute trigger: ${{ inputs.debug }}"
@@ -24,7 +24,7 @@ jobs:
           echo "Runner OS: ${{ runner.os }}"
       
       - name: "[debug] Print when triggered from develop"
-        if: ${{ inputs.debug }} == 'true' && ${{ github.ref }} == 'develop'
+        if: ${{ inputs.debug && github.ref == 'refs/heads/develop' }}
         run: |
           echo "I was triggered from main"
       - name: Greeting
