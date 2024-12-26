@@ -8,7 +8,7 @@ on:
         type: boolean
         default: false
 
-run-name: 07 - Expression | DEBUG - ${{ inputs.debug }}
+run-name: 07 - Expression | DEBUG - ${{ inputs.debug  == 'ON' || 'OFF'}}
 
 jobs:
   echo:
