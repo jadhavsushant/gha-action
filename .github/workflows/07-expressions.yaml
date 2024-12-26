@@ -16,4 +16,5 @@ jobs:
         if: ${{ inputs.debug }} == "true"
         run: |
           echo "Triggered by: ${{ github.actor }}"
+          echo "Printing Inpute trigger: ${{ inputs.debug }}"
 
