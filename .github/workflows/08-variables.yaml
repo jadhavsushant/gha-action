@@ -14,7 +14,6 @@ jobs:
     env:
       JOB_VAR: 'I am a job env var'
       OVERWRITTEN: 'I have been overwritten at the job level'
-    
     steps:
       - name: 'Print Env Variables'
         env:
@@ -30,4 +29,5 @@ jobs:
       - name: "Overwrite Job Variable"
         env:
           OVERWRITTEN: "I have been overwritten at the step level"
-        run: "Step env var: ${{ vars.OVERWRITTEN }} "
+        run: |
+          echo "Step env var: ${{ vars.OVERWRITTEN }} "
